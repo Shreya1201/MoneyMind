@@ -1,41 +1,122 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+:root{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif; 
+  background: none;
+  color: inherit;
+}
+
+/* Root themes */
+:root {
+  --primary-light: #f2f0f0;
+  --primary-dark: #141b2d;
+  --text-light: #141414;
+  --text-dark: #e0e0e0;
+  --accent-light: #6870fa;
+  --accent-dark: #6870fa;
+  --sidebar-width: 220px;
+  --sidebar-collapsed-width: 60px;
+  --transition-speed: 0.3s;
+}
+
+/* Apply theme */
+[data-theme="light"] {
+  --bg: var(--primary-light);
+  --text: var(--text-light);
+  --accent: var(--accent-light);
+}
+
+[data-theme="dark"] {
+  --bg: var(--primary-dark);
+  --text: var(--text-dark);
+  --accent: var(--accent-dark);
+}
+
+/* Layout */
+.layout {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--bg);
+  color: var(--text);
+  transition: width var(--transition-speed);
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-header {
+  padding: 20px;
+  font-weight: bold;
   text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menu li {
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.menu li:hover {
+  background-color: var(--accent);
+  color: white;
 }
 
-.card {
-  padding: 2em;
+/* Main content */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
-.read-the-docs {
-  color: #888;
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background-color: var(--bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar .hamburger {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.navbar .logo {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.navbar .right {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }

@@ -1,0 +1,224 @@
+.light {
+  /* Light Theme */
+  --bg: #F9FAFB;
+  --card-bg: #FFFFFF;
+  --text: #1F2937;
+  --heading: #111827;
+
+  --primary: #6366F1;   /* Indigo */
+  --secondary: #10B981; /* Emerald */
+  --danger: #F43F5E;    /* Rose */
+  --warning: #F59E0B;   /* Amber */
+
+  --table-header: #E5E7EB;
+  --menu-hover: #F3F4F6;
+}
+
+.dark {
+  --bg: #111827;
+  --card-bg: #1F2937;
+  --text: #F3F4F6;
+  --heading: #F9FAFB;
+
+  --primary: #F59E0B;   /* Amber */
+  --secondary: #6366F1; /* Indigo */
+  --danger: #F43F5E;    /* Rose */
+  --warning: #10B981;   /* Emerald */
+
+  --table-header: #374151;
+  --menu-hover: #1F2937;
+}
+
+.profile-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.profile-card {
+  height: 540px;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.profile-card h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.edit-icon, .close-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--profile-border);
+  object-fit: cover;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.photo-actions input {
+  display: none;
+}
+
+.btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.profile-details input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+.avatar-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.avatar-popup {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 600px;
+}
+
+.avatar-popup h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.5rem;
+  justify-items: center;
+}
+
+.avatar-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.avatar-item:hover {
+  border-color: var(--primary);
+}
+
+.avatar-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  object-fit: cover;   /* <-- fill the circle while cropping excess */
+  transform: scale(1.1);
+}
+
+.avatar-item {
+  transition: all 0.2s ease-in-out;
+  object-fit: cover;
+}
+
+.avatar-item:hover {
+  transform: scale(1.1);  /* slightly zooms in on hover */
+  border-color: var(--primary);
+}
+
+/* Loader overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+/* Spinner */
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Loading text */
+.loader-text {
+  font-size: 18px;
+  color: #555;
+}
+

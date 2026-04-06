@@ -6,7 +6,7 @@ import {AuthContext} from "../contexts/AuthContext";
 const API_URL = 'http://localhost:5000/api';
 
 export const useApi = () => {
-    const {token, logout} = useContext(AuthContext);
+    const {token, userId, theme, logout} = useContext(AuthContext);
 
     const api = useMemo(()=>{
         const instance = axios.create({
@@ -20,6 +20,10 @@ export const useApi = () => {
             (config) => {
                 if(token){
                     config.headers.Authorization = `Bearer ${token}`;
+                    config.headers.Data = JSON.stringify({
+                        UserId: parseInt(userId),
+                        Theme: theme,
+                    });
                 } 
                 return config;
             },
