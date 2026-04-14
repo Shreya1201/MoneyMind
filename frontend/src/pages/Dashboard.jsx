@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { decodeEmoji } from "../utils/emojiCodec";
 import CustomTooltip from "../components/CustomToolTip"
 import Loader from "../components/Loader";
+import AIChatWidget from "../components/AIChatWidget";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const Dashboard = () => {
@@ -21,10 +22,12 @@ const Dashboard = () => {
     const [incomeExpenseOverTime, setIncomeExpenseOverTime] = useState([]);
     const [balanceTrend, setBalanceTrend] = useState([]);
     const [transactions, setTransactions] = useState([]);
-
+    const [isOpen, setIsOpen] = useState(false);
     useEffect(()=>{
         getData();
     },[])
+    const isNegativeBalance = balance < 0;
+    const isFirstTimeUser = totalIncome === 0;
 
     const getData = async () => {
         setIsLoading(true);
@@ -49,6 +52,19 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-container">
+            {isFirstTimeUser && (
+                <div className="warning-banner">
+                    ⚠️ You have no income recorded yet. Your balance reflects expenses only.
+                    <div className="cta-container">
+                        <button 
+                        className="cta-btn" 
+                        onClick={() => window.location.href = "/incomes"}
+                        >
+                        ➕ Add your first income
+                        </button>
+                    </div>
+                </div>
+            )}
             {/* Summary Cards */}
             <div className="summary-cards">
                 <div className="card">
@@ -59,7 +75,7 @@ const Dashboard = () => {
                     <h3>Total Expenses</h3>
                     <p><span>₹</span>{totalExpense}</p>
                 </div>
-                <div className="card">
+                <div className={`card ${isNegativeBalance ? 'card-warning' : ''}`}>
                     <h3>Balance</h3>
                     <p><span>₹</span>{balance}</p>
                 </div>
@@ -122,6 +138,23 @@ const Dashboard = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="ai-container">
+                {!isOpen && (
+                    <button className="ai-fab" onClick={() => setIsOpen(true)}>
+                    🤖
+                    </button>
+                )}
+
+                {isOpen && (
+                    <div className="ai-widget">
+                    <div className="ai-header">
+                        🤖 AI Advisor
+                        <span className="close-btn" onClick={() => setIsOpen(false)}>✖</span>
+                    </div>
+                    <AIChatWidget/>
+                    </div>
+                )}
             </div>
         </div>
     )
