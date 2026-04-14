@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // <-- import cors
@@ -7,6 +8,13 @@ const categoriesRoutes = require('./routes/categories');
 const expensesRoutes = require('./routes/expenses');
 const profileRoute = require('./routes/profile');
 const dashboardRoute = require('./routes/dashboard');
+const aiRoutes = require('./routes/ai');
+const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
+const fetch = require('node-fetch');
+global.fetch = fetch;
+global.Headers = fetch.Headers;
+global.Request = fetch.Request;
+global.Response = fetch.Response;
 
 const app = express();
 const PORT = 5000;
@@ -20,14 +28,14 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
-
-// Register routes
-app.use('/auth', authRoutes);
-app.use('/dashboard', dashboardRoute);
-app.use('/incomes', incomesRoutes);
-app.use('/expenses', expensesRoutes);
-app.use('/categories', categoriesRoutes);
-app.use('/profile', profileRoute);
+// app.use('/', apiLimiter);
+app.use('/auth', authLimiter, authRoutes);
+app.use('/dashboard', apiLimiter, dashboardRoute);
+app.use('/incomes', apiLimiter, incomesRoutes);
+app.use('/expenses', apiLimiter, expensesRoutes);
+app.use('/categories', apiLimiter, categoriesRoutes);
+app.use('/profile', apiLimiter, profileRoute);
+app.use('/api', apiLimiter, aiRoutes);
 
 app.get('/', (req, res) => res.send('MoneyMind Backend Running'));
 

@@ -12,13 +12,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@pinecone-database/pinecone": "^7.2.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^4.17.3",
+    "express-rate-limit": "^6.11.2",
     "jsonwebtoken": "^9.0.2",
     "msnodesqlv8": "^2.2.0",
     "mssql": "^8.1.4",
+    "node-fetch": "^2.7.0",
     "odbc": "^2.4.9"
   },
   "devDependencies": {
